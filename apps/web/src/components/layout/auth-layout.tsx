@@ -83,6 +83,12 @@ export function AuthLayout() {
           icon: <ListTodo className="h-4 w-4 shrink-0" />,
           badge: 'Ref',
         },
+        {
+          label: 'Times',
+          path: '/teams',
+          icon: <Users className="h-4 w-4 shrink-0" />,
+          badge: null,
+        },
         ...(isAdmin
           ? [
               {
