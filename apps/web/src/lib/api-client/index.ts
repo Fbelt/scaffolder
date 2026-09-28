@@ -10,17 +10,22 @@ import type {
   AuthControllerLoginParams,
   AuthMeResponseDto,
   CreateTaskDto,
+  CreateTeamDto,
   CreateUserDto,
   LoginRequestDto,
   ManagedUserDto,
   PaginatedTasksResponseDto,
+  PaginatedTeamsResponseDto,
   PaginatedUsersResponseDto,
   ProblemDetailsDto,
   SetUserStatusDto,
   TaskDto,
   TasksControllerFindAllParams,
+  TeamDto,
+  TeamsControllerFindAllParams,
   UpdateSelfUserDto,
   UpdateTaskDto,
+  UpdateTeamDto,
   UpdateUserDto,
   UserControllerListParams
 } from './models';
@@ -1083,6 +1088,191 @@ export const getTasksControllerRemoveUrl = (id: string,) => {
 export const tasksControllerRemove = async (id: string, options?: Parameters<typeof customFetch>[1]): Promise<tasksControllerRemoveResponse> => {
 
   return customFetch<tasksControllerRemoveResponse>(getTasksControllerRemoveUrl(id),
+  {
+    ...options,
+    method: 'DELETE'
+
+
+  }
+);}
+
+
+
+export type teamsControllerCreateResponse201 = {
+  data: TeamDto
+  status: 201
+}
+
+export type teamsControllerCreateResponseSuccess = (teamsControllerCreateResponse201) & {
+  headers: Headers;
+};
+;
+
+export type teamsControllerCreateResponse = (teamsControllerCreateResponseSuccess)
+
+export const getTeamsControllerCreateUrl = () => {
+
+
+
+
+  return `/api/v1/teams`
+}
+
+export const teamsControllerCreate = async (createTeamDto: CreateTeamDto, options?: Parameters<typeof customFetch>[1]): Promise<teamsControllerCreateResponse> => {
+
+    const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
+    if (!h) return {};
+    if (h instanceof Headers) return Object.fromEntries(h.entries());
+    if (Array.isArray(h)) return Object.fromEntries(h);
+    return h;
+  };
+return customFetch<teamsControllerCreateResponse>(getTeamsControllerCreateUrl(),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...getHeaders(options?.headers) },
+    body: JSON.stringify(createTeamDto)
+  }
+);}
+
+
+
+export type teamsControllerFindAllResponse200 = {
+  data: PaginatedTeamsResponseDto
+  status: 200
+}
+
+export type teamsControllerFindAllResponseSuccess = (teamsControllerFindAllResponse200) & {
+  headers: Headers;
+};
+;
+
+export type teamsControllerFindAllResponse = (teamsControllerFindAllResponseSuccess)
+
+export const getTeamsControllerFindAllUrl = (params?: TeamsControllerFindAllParams,) => {
+  const normalizedParams = new URLSearchParams();
+
+  Object.entries(params || {}).forEach(([key, value]) => {
+
+    if (value !== undefined) {
+      normalizedParams.append(key, value === null ? 'null' : String(value))
+    }
+  });
+
+  const stringifiedParams = normalizedParams.toString();
+
+  return stringifiedParams.length > 0 ? `/api/v1/teams?${stringifiedParams}` : `/api/v1/teams`
+}
+
+export const teamsControllerFindAll = async (params?: TeamsControllerFindAllParams, options?: Parameters<typeof customFetch>[1]): Promise<teamsControllerFindAllResponse> => {
+
+  return customFetch<teamsControllerFindAllResponse>(getTeamsControllerFindAllUrl(params),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+export type teamsControllerFindByIdResponse200 = {
+  data: TeamDto
+  status: 200
+}
+
+export type teamsControllerFindByIdResponseSuccess = (teamsControllerFindByIdResponse200) & {
+  headers: Headers;
+};
+;
+
+export type teamsControllerFindByIdResponse = (teamsControllerFindByIdResponseSuccess)
+
+export const getTeamsControllerFindByIdUrl = (id: string,) => {
+
+
+
+
+  return `/api/v1/teams/${id}`
+}
+
+export const teamsControllerFindById = async (id: string, options?: Parameters<typeof customFetch>[1]): Promise<teamsControllerFindByIdResponse> => {
+
+  return customFetch<teamsControllerFindByIdResponse>(getTeamsControllerFindByIdUrl(id),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+export type teamsControllerUpdateResponse200 = {
+  data: TeamDto
+  status: 200
+}
+
+export type teamsControllerUpdateResponseSuccess = (teamsControllerUpdateResponse200) & {
+  headers: Headers;
+};
+;
+
+export type teamsControllerUpdateResponse = (teamsControllerUpdateResponseSuccess)
+
+export const getTeamsControllerUpdateUrl = (id: string,) => {
+
+
+
+
+  return `/api/v1/teams/${id}`
+}
+
+export const teamsControllerUpdate = async (id: string,
+    updateTeamDto: UpdateTeamDto, options?: Parameters<typeof customFetch>[1]): Promise<teamsControllerUpdateResponse> => {
+
+    const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
+    if (!h) return {};
+    if (h instanceof Headers) return Object.fromEntries(h.entries());
+    if (Array.isArray(h)) return Object.fromEntries(h);
+    return h;
+  };
+return customFetch<teamsControllerUpdateResponse>(getTeamsControllerUpdateUrl(id),
+  {
+    ...options,
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json', ...getHeaders(options?.headers) },
+    body: JSON.stringify(updateTeamDto)
+  }
+);}
+
+
+
+export type teamsControllerRemoveResponse204 = {
+  data: void
+  status: 204
+}
+
+export type teamsControllerRemoveResponseSuccess = (teamsControllerRemoveResponse204) & {
+  headers: Headers;
+};
+;
+
+export type teamsControllerRemoveResponse = (teamsControllerRemoveResponseSuccess)
+
+export const getTeamsControllerRemoveUrl = (id: string,) => {
+
+
+
+
+  return `/api/v1/teams/${id}`
+}
+
+export const teamsControllerRemove = async (id: string, options?: Parameters<typeof customFetch>[1]): Promise<teamsControllerRemoveResponse> => {
+
+  return customFetch<teamsControllerRemoveResponse>(getTeamsControllerRemoveUrl(id),
   {
     ...options,
     method: 'DELETE'
