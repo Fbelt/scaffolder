@@ -62,6 +62,7 @@ sequenceDiagram
 erDiagram
     UserProfile ||--o{ Session : "possui"
     UserProfile ||--o{ Task : "é proprietário de"
+    UserProfile ||--o{ Team : "é proprietário de"
 
     UserProfile {
         uuid id PK
@@ -124,6 +125,11 @@ erDiagram
 | `GET` | `/api/v1/tasks/:id` | Sessão | `USER` | Detalhes da tarefa (owner ou admin) |
 | `PUT` | `/api/v1/tasks/:id` | Sessão + CSRF | `USER` | Atualiza tarefa respeitando regras de transição |
 | `DELETE`| `/api/v1/tasks/:id` | Sessão + CSRF | `USER` | Remoção lógica (*soft delete*) da tarefa |
+| `GET` | `/api/v1/teams` | Sessão | `USER` | Lista times |
+| `POST` | `/api/v1/teams` | Sessão + CSRF | `USER` | Cria time |
+| `GET` | `/api/v1/teams/:id` | Sessão | `USER` | Detalhes do time |
+| `PUT` | `/api/v1/teams/:id` | Sessão + CSRF | `USER` | Atualiza time |
+| `DELETE`| `/api/v1/teams/:id` | Sessão + CSRF | `USER` | Remove time (*soft delete*) |
 
 ---
 
